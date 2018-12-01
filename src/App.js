@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Message from './components/message'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.increment = this.increment.bind(this)
+  }
+  state = {
+    counter: 0,
+    phrases: ["hello", "Sona"]
+  }
+  increment(){
+    this.setState({
+      counter: this.state.counter + 1
+    })
+  }
+  decrement= ()=>{
+    this.setState({
+      counter: this.state.counter - 1
+    });
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Message text={"sdfghj"} phrases={this.state.phrases}></Message>
+        <div>{this.props.text}</div>
+        {this.state.counter}
+        <button onClick={this.increment}>Increment</button>
+        <button onClick={this.decrement}>Decrement</button>
       </div>
     );
   }
