@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Message from './components/message'
+import TodoList from "./components/todoList";
+import TodoCreater from "./components/todoCreater";
+
+const todos = [
+  {
+    description: 'Learn Java Script',
+    isDone: true
+  },
+  {
+    description:"Learn React",
+    isDone: false
+  }
+]
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +21,7 @@ class App extends Component {
   }
   state = {
     counter: 0,
-    phrases: ["hello", "Sona"]
+    todos
   }
   increment(){
     this.setState({
@@ -22,14 +33,18 @@ class App extends Component {
       counter: this.state.counter - 1
     });
   }
+  createTodo=(todo)=>{
+    const todos = [...this.state.todos]
+    todos.push(todo)
+    this.setState({
+      todos
+    });
+  }
   render() {
     return (
       <div className="App">
-        <Message text={"sdfghj"} phrases={this.state.phrases}></Message>
-        <div>{this.props.text}</div>
-        {this.state.counter}
-        <button onClick={this.increment}>Increment</button>
-        <button onClick={this.decrement}>Decrement</button>
+        <TodoCreater onTodoCreate={this.createTodo}/>
+        <TodoList todos={this.state.todos}/>
       </div>
     );
   }
